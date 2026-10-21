@@ -4,23 +4,30 @@ Independent, hands-on Windows security learning and SOC/SecOps portfolio by [P-d
 
 **Scope:** Windows security only (host and authorized Windows 10 VirtualBox guest). This is an educational lab, not a production security assessment. No exploitation or unauthorized activity.
 
-## Book-driven roadmap: Gray Hat Hacking, 6th edition (2022)
+## Primary source and sequence
 
-Primary source: Allen Harper et al., *Gray Hat Hacking: The Ethical Hacker's Handbook*, 6th edition. Independent study notes, not a reproduction of the book.
+**James Forshaw, _Windows Security Internals: A Deep Dive into Windows Authentication, Authorization, and Auditing_** is the authoritative source for **chapter order, concepts, commands and worked examples**.
 
-The source book begins with foundational material (chapters 1-12); this Windows-only repository concentrates on the book's Windows chapters **13-17**, preserving their order and original lab numbering. The full book also includes other platforms and topics outside this repository.
+**_Gray Hat Hacking: The Ethical Hacker's Handbook_ (6th edition)** informs only the research methodology: explain the security mechanism, formulate hypotheses, reproduce observations in an authorized VM, assess attacker/defender implications, record evidence, and validate mitigations. It does **not** replace Forshaw's chapter structure.
 
-| Source chapter | Exact chapter title | Status |
-| --- | --- | --- |
-| 13 | Basic Windows Exploitation | Next: Lab 13-1 Compiling on Windows |
-| 14 | Windows Kernel Exploitation | Not started |
-| 15 | PowerShell Exploitation | Not started |
-| 16 | Getting Shells Without Exploits | Not started |
-| 17 | Post-Exploitation in Modern Windows Environments | Not started |
+### Current position
 
-**Next book exercise:** Chapter 13, Lab 13-1: Compiling on Windows. First review the chapter's specified tools, example code and prerequisites before installing or running anything. Lab 13-2 (Crashing the Program) follows, then Lab 13-3 (Exploiting ProSSHD Server). Any exploitation must remain in an isolated, authorized lab.
+**Part I: An Overview of the Windows Operating System — Chapter 1: Setting Up a PowerShell Testing Environment.** Start at **Choosing a PowerShell Version** and follow the chapter in order: Configuring PowerShell; An Overview of the PowerShell Language (types/variables/expressions; executing commands; command discovery/help; functions; objects; filtering/ordering/grouping; exporting data); Wrapping Up.
 
-The previous `labs/lab-01-windows-powershell-security-baseline/` is a **supplementary, assistant-created draft**, not a Gray Hat Hacking lab; it remains unexecuted and is not part of the book's sequence. Prior Windows work is documented separately in `docs/PRIOR-WORK.md`.
+**Progress:** Chapter 1 not yet completed or evidenced. The Windows 10 guest SSH connection has been verified, but that does not complete the book's environment setup.
+
+### Documentation rules
+
+- Identify original chapter/section and page before each activity.
+- Distinguish **book-directed** actions from **optional gray-hat methodology extensions**.
+- Do not attribute invented exercises to Forshaw.
+- Do not claim a chapter is complete without performing and recording the relevant exercises.
+- Execute only in owned/authorized lab systems; obtain approval for modifications.
+- Never publish unsanitized host details, credentials, hashes or raw logs.
+
+**Historical work:** The cross-platform cybersecurity portfolio contains prior Windows baseline and Event Log reviews; they are not chapters completed from Forshaw. See [prior work](docs/PRIOR-WORK.md).
+
+**Existing supplemental draft:** [Windows/PowerShell baseline](labs/lab-01-windows-powershell-security-baseline/README.md) was created before this source correction and is **not** the book's Chapter 1. Do not use it as the canonical sequence.
 ## Lab methodology
 
 Each lab documents objectives, scope, relevant concepts, exact commands, expected versus observed results, sanitized evidence, defensive interpretation, remediation, and lessons learned. An unexecuted lab is never labeled completed.
@@ -43,7 +50,7 @@ Those are previous independent lab results, **not** newly executed Windows-Secur
 
 ## Start here
 
-**Next:** Chapter 13, Lab 13-1: Compiling on Windows (not yet started). [Supplementary baseline draft](labs/lab-01-windows-powershell-security-baseline/README.md)
+**Next:** Forshaw, Chapter 1, Choosing a PowerShell Version (not yet started). [Supplementary baseline draft](labs/lab-01-windows-powershell-security-baseline/README.md)
 
 ## Repository layout
 
@@ -65,4 +72,5 @@ Windows-Security/
 ## Security and publishing policy
 
 Use only owned or explicitly authorized systems. Never commit credentials, secrets, unsanitized exports, personal data or production artifacts. Store raw findings outside this public repository and publish only reviewed, sanitized evidence.
+
 
