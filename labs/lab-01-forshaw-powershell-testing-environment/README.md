@@ -1,51 +1,58 @@
-﻿# Lab 01 â€” Setting Up a PowerShell Testing Environment
+# Lab 01 - PowerShell Testing Environment
 
-**Primary source:** James Forshaw, *Windows Security Internals: A Deep Dive into Windows Authentication, Authorization, and Auditing*, Part I, Chapter 1.
+**Reference:** James Forshaw, *Windows Security Internals*, Chapter 1: Setting Up a PowerShell Testing Environment.
 
-**Methodology:** Follow Forshaw's order and examples. Use *Gray Hat Hacking* only as an investigative methodology: hypothesis, controlled experiment, evidence, interpretation and defensive implications. Network troubleshooting is supplemental, **not** an exercise attributed to Forshaw.
+**Environment:** Windows 10 virtual machine, Windows PowerShell 5.1, Oracle VirtualBox.
 
-**Status:** Environment setup and the first NtObjectManager security descriptor example verified from user screenshots. Chapter 1 language sections pending.
+**Status:** Environment configured and initial security descriptor example reproduced. Further Chapter 1 exercises remain in progress.
 
-## 1. Choosing a PowerShell Version
+## Objective
+
+Prepare a repeatable PowerShell environment for examining Windows security internals, verify the NtObjectManager module, and inspect the output of a newly created security descriptor.
+
+## 1. PowerShell version
 
 ```powershell
 $PSVersionTable
 Get-Command pwsh -ErrorAction SilentlyContinue
 ```
 
-Observed: Windows PowerShell **5.1.19041.3803**, edition **Desktop**, build **10.0.19041.3803**, CLR **4.0.30319.42000**. No `pwsh` command found in this session (not proof of absence elsewhere).
+The installed Windows PowerShell version was **5.1.19041.3803** (Desktop edition). The `pwsh` command was not available through command discovery in the tested session.
 
-## 2. Configuring PowerShell
+Evidence: [01](evidence/01-powershell-version.jpg).
+
+## 2. Execution policy
 
 ```powershell
 Get-ExecutionPolicy -List
 Get-ExecutionPolicy
 Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
-Get-ExecutionPolicy
 Get-ExecutionPolicy -List
 ```
 
-**Before:** all scopes `Undefined`, effective `Restricted`. **After user approval:** effective `RemoteSigned`; `CurrentUser = RemoteSigned`, other scopes `Undefined`.
+Initially, all execution policy scopes were `Undefined`, with an effective policy of `Restricted`. After setting the current-user policy, the effective policy was `RemoteSigned`; the other scopes remained `Undefined`.
 
-**Gray Hat analysis:** Execution policy is not a security boundary. `RemoteSigned` permits local unsigned scripts, with signature requirements for scripts marked as downloaded from the Internet. The change affects the current user, not the whole machine. Possible rollback (only with explicit approval): `Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Undefined`.
+Execution policy helps control script execution but is not a security boundary. The change was limited to `CurrentUser` rather than `LocalMachine`.
 
-## 3. NuGet failure and network diagnosis â€” supplemental environment work
+Evidence: [02](evidence/02-execution-policy-initial.jpg), [03](evidence/03-execution-policy-effective.jpg), [04](evidence/04-execution-policy-verified.jpg).
+
+## 3. Package installation and connectivity
 
 ```powershell
 Get-Module -ListAvailable NtObjectManager
 Install-Module NtObjectManager -Scope CurrentUser -Force
 Test-NetConnection www.powershellgallery.com -Port 443
-Test-NetConnection go.microsoft.com -Port 443
-[Net.ServicePointManager]::SecurityProtocol
 ```
 
-Initial module installation failed while downloading the NuGet provider. Both Microsoft domain names failed DNS resolution. TLS displayed `SystemDefault`, which does not establish a TLS fault.
+The initial installation attempt failed while downloading the NuGet provider. DNS resolution was unavailable because the guest had no Internet route. Its internal and host-only adapters provided lab connectivity but no default gateway for external access.
 
-The guest had an internal `LabSeguridad` adapter with APIPA addressing, a host-only adapter that supported SSH, and no IPv4 default route. With user approval, Windows was shut down normally and a **third NAT adapter** added, retaining the existing two. After reboot the NAT adapter obtained an address and default gateway. `Test-NetConnection www.powershellgallery.com -Port 443` returned **`TcpTestSucceeded : True`**.
+A third VirtualBox adapter using NAT was added while preserving the existing lab adapters. Following restart, DNS and TCP connectivity to the PowerShell Gallery endpoint on port 443 succeeded.
 
-**Interpretation:** local SSH connectivity does not imply Internet access. The missing default route explains the inability to reach package repositories. This troubleshooting is not a Forshaw exercise.
+The connectivity issue was an environment dependency encountered during setup, not a finding about Windows access controls.
 
-## 4. NtObjectManager installation and descriptor example
+Evidence: [05](evidence/05-nuget-install-error.jpg), [06](evidence/06-dns-failure.jpg), [07](evidence/07-nat-https-restored.jpg).
+
+## 4. NtObjectManager verification
 
 ```powershell
 Install-Module NtObjectManager -Scope CurrentUser -Force
@@ -55,7 +62,7 @@ Get-Module NtObjectManager
 New-NtSecurityDescriptor
 ```
 
-The user accepted the NuGet provider installation. **NtObjectManager 2.0.1** installed and imported successfully. The first descriptor example returned:
+NtObjectManager **2.0.1** was installed successfully and imported into the session. The security descriptor command produced the following output:
 
 ```text
 Owner  DACL ACE Count  SACL ACE Count  Integrity Level
@@ -63,15 +70,24 @@ Owner  DACL ACE Count  SACL ACE Count  Integrity Level
 NONE   NONE            NONE            NONE
 ```
 
-**Gray Hat analysis:** This creates a security descriptor in memory; it does not change the ACL of any Windows object. No allow/deny decision was tested. An absent DACL is not equivalent to an empty DACL.
+The command created an unconfigured security descriptor in memory. It did not apply permissions to a Windows object or execute an access check. In Windows security, an absent DACL and an empty DACL have different implications and must not be treated as equivalent.
 
-## Results and next step
+Evidence: [08](evidence/08-ntobjectmanager-installed.jpg), [09](evidence/09-security-descriptor.jpg).
 
-**Verified:** PowerShell version, execution policy before/after, restored Internet connectivity, module installation/import, descriptor output. **Not yet done:** Chapter 1 sections on types, variables, expressions, command execution, help, functions, objects, filtering and exporting. No compromise or vulnerability is claimed.
+## Results
 
-**Next in Forshaw's order:** *Understanding Types, Variables, and Expressions*, following the book's own examples.
+- Windows PowerShell 5.1 identified.
+- Execution policy configured at current-user scope.
+- External package connectivity restored.
+- NtObjectManager 2.0.1 installed and imported.
+- Initial security descriptor output reproduced.
 
-## Evidence
+A separate [read-only verification record](evidence/10-live-verification.txt) confirms the current environment state.
 
-See [evidence manifest](evidence/README.md). The nine original screenshots supplied by the user in chat have been committed to the evidence directory; image 07 was cropped to remove network adapter inventory.
+## Next section
 
+Chapter 1: **Understanding Types, Variables, and Expressions**.
+
+## Evidence index
+
+[View all screenshots and verification output](evidence/README.md).
