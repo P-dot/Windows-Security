@@ -74,3 +74,8 @@ Windows-Security/
 Use only owned or explicitly authorized systems. Never commit credentials, secrets, unsanitized exports, personal data or production artifacts. Store raw findings outside this public repository and publish only reviewed, sanitized evidence.
 
 
+
+## Recorded Forshaw lab
+
+- [Lab 01 — PowerShell testing environment](labs/lab-01-forshaw-powershell-testing-environment/README.md): PowerShell 5.1, execution policy, NtObjectManager 2.0.1, security descriptor output. Screenshot manifest included; image files pending import.
+
