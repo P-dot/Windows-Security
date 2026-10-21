@@ -1,4 +1,4 @@
-# Lab 01 — Setting Up a PowerShell Testing Environment
+﻿# Lab 01 â€” Setting Up a PowerShell Testing Environment
 
 **Primary source:** James Forshaw, *Windows Security Internals: A Deep Dive into Windows Authentication, Authorization, and Auditing*, Part I, Chapter 1.
 
@@ -29,7 +29,7 @@ Get-ExecutionPolicy -List
 
 **Gray Hat analysis:** Execution policy is not a security boundary. `RemoteSigned` permits local unsigned scripts, with signature requirements for scripts marked as downloaded from the Internet. The change affects the current user, not the whole machine. Possible rollback (only with explicit approval): `Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Undefined`.
 
-## 3. NuGet failure and network diagnosis — supplemental environment work
+## 3. NuGet failure and network diagnosis â€” supplemental environment work
 
 ```powershell
 Get-Module -ListAvailable NtObjectManager
@@ -73,4 +73,5 @@ NONE   NONE            NONE            NONE
 
 ## Evidence
 
-See [evidence manifest](evidence/README.md). The user provided screenshots in chat. These images are **not yet uploaded** to this repository; they require transfer and privacy review before publication.
+See [evidence manifest](evidence/README.md). The nine original screenshots supplied by the user in chat have been committed to the evidence directory; image 07 was cropped to remove network adapter inventory.
+

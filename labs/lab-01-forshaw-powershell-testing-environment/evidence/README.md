@@ -1,17 +1,19 @@
-# Lab 01 — Evidence manifest
+﻿# Lab 01 - Evidence
 
-Screenshots supplied by the user in chat on 2026-10-21. **Images pending transfer and sanitization; do not claim they are committed.**
+Nine original screenshots supplied in the conversation and published on 2026-10-21. Image 07 was cropped to remove the network adapter IP/MAC inventory. Images were re-encoded to strip original image metadata.
 
-| Planned file | Captured observation |
+| Screenshot | Observation |
 |---|---|
-| 01-powershell-version.png | PowerShell version 5.1 |
-| 02-execution-policy-initial.png | Five scopes Undefined |
-| 03-execution-policy-effective.png | Restricted and policy-change prompt |
-| 04-execution-policy-verified.png | CurrentUser RemoteSigned |
-| 05-nuget-install-error.png | NuGet provider download error |
-| 06-dns-failure.png | DNS resolution failed |
-| 07-nat-https-restored.png | NAT gateway and HTTPS 443 success |
-| 08-ntobjectmanager-installed.png | NtObjectManager 2.0.1 installed |
-| 09-security-descriptor.png | Import success; New-NtSecurityDescriptor NONE fields |
+| [01-powershell-version.jpg](01-powershell-version.jpg) | Screenshot of the corresponding lab step |
+| [02-execution-policy-initial.jpg](02-execution-policy-initial.jpg) | Screenshot of the corresponding lab step |
+| [03-execution-policy-effective.jpg](03-execution-policy-effective.jpg) | Screenshot of the corresponding lab step |
+| [04-execution-policy-verified.jpg](04-execution-policy-verified.jpg) | Screenshot of the corresponding lab step |
+| [05-nuget-install-error.jpg](05-nuget-install-error.jpg) | Screenshot of the corresponding lab step |
+| [06-dns-failure.jpg](06-dns-failure.jpg) | Screenshot of the corresponding lab step |
+| [07-nat-https-restored.jpg](07-nat-https-restored.jpg) | Screenshot of the corresponding lab step |
+| [08-ntobjectmanager-installed.jpg](08-ntobjectmanager-installed.jpg) | Screenshot of the corresponding lab step |
+| [09-security-descriptor.jpg](09-security-descriptor.jpg) | Screenshot of the corresponding lab step |
 
-Before publishing publicly, review/redact hostnames, usernames, IPs, MAC addresses and other sensitive data. Preserve the relevant command and output.
+[Additional read-only verification](10-live-verification.txt).
+
+The images record authorized laboratory observations; they do not establish that any Windows system is free of vulnerabilities.
