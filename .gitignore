@@ -1,0 +1,16 @@
+﻿*.log
+*.evtx
+*.etl
+*.dmp
+*.pfx
+*.p12
+*.pem
+*.key
+*.kdbx
+.env
+.env.*
+id_rsa*
+id_ed25519*
+**/raw/
+**/private/
+**/unsanitized/
