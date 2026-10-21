@@ -1,0 +1,32 @@
+﻿Lab 01 live re-verification (read-only) - 2026-10-21 17:35:53 +02:00
+Guest: authorized Windows VM (host identifiers omitted)
+=== PowerShell Version ===
+5.1.19041.3803
+=== PowerShell Edition ===
+Desktop
+=== Effective Execution Policy ===
+RemoteSigned
+=== Execution Policy Scopes ===
+
+        Scope ExecutionPolicy
+        ----- ---------------
+MachinePolicy       Undefined
+   UserPolicy       Undefined
+      Process       Undefined
+  CurrentUser    RemoteSigned
+ LocalMachine       Undefined
+
+
+
+=== NtObjectManager Version ===
+2.0.1
+=== Security Descriptor ===
+
+Owner DACL ACE Count SACL ACE Count Integrity Level
+----- -------------- -------------- ---------------
+NONE  NONE           NONE           NONE           
+
+
+
+=== HTTPS Connectivity ===
+True
