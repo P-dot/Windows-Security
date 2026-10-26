@@ -8,7 +8,8 @@ This repository documents reproducible experiments conducted in an isolated Wind
 
 | Lab | Topic | Status |
 | --- | --- | --- |
-| [01 - PowerShell Testing Environment](labs/lab-01-forshaw-powershell-testing-environment/README.md) | PowerShell configuration, module installation, security descriptors | Environment validated; Chapter 1 in progress |
+| [01 - PowerShell Testing Environment](labs/lab-01-forshaw-powershell-testing-environment/README.md) | PowerShell configuration, NuGet, NtObjectManager and initial descriptor | Completed |
+| [02 - PowerShell Objects and Process Analysis](labs/lab-02-powershell-object-and-process-analysis/README.md) | Types, expressions, objects, functions, pipelines and process inventory | Documented; image import pending |
 
 ## Lab environment
 
